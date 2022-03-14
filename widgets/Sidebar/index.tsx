@@ -10,18 +10,24 @@ import styles from "./Sidebar.module.css";
 import SidebarItems from "./SidebarItems";
 import { IoLogOut } from "react-icons/io5";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const index = () => {
+  const router = useRouter();
+
   return (
     <nav className={styles.sidebar}>
       <div className={styles.logo} />
       <List className={styles.list}>
         {SidebarItems.map((item, index) => (
-          <Link href={item.path}>
+          <Link key={index} href={item.path}>
             <ListItemButton
-              key={index}
               disableRipple
-              className={styles.listItem}>
+              className={
+                item.path === router.pathname
+                  ? styles.listItemActive
+                  : styles.listItem
+              }>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText>
                 <Typography className={styles.listItemText}>
