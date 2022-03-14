@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 
 const index = () => {
   const router = useRouter();
-
   return (
     <nav className={styles.sidebar}>
       <div className={styles.logo} />
@@ -23,6 +22,7 @@ const index = () => {
           <Link key={index} href={item.path}>
             <ListItemButton
               disableRipple
+              sx={{ "&:hover": { background: "rgba(107, 140, 255, 0.2)" } }}
               className={
                 item.path === router.pathname
                   ? styles.listItemActive
@@ -38,7 +38,10 @@ const index = () => {
           </Link>
         ))}
         <div style={{ flexGrow: 1 }}></div>
-        <ListItemButton disableRipple className={styles.listItem}>
+        <ListItemButton
+          disableRipple
+          className={styles.listItem}
+          sx={{ "&:hover": { background: "rgba(107, 140, 255, 0.2)" } }}>
           <ListItemIcon>
             <IoLogOut
               style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
