@@ -31,7 +31,10 @@ const index: NextPage = () => {
           />
           <Box className={styles.formFooter}>
             <p style={{ fontSize: ".8rem" }}>
-              Don't have an account? <Link href="/register">Register now</Link>
+              Don't have an account?{" "}
+              <Link href="/register">
+                <span className={styles.link}>Register</span>
+              </Link>
             </p>
             <Button
               variant="contained"
@@ -39,7 +42,7 @@ const index: NextPage = () => {
                 backgroundColor: theme.colors.primary,
                 borderRadius: "10px",
               }}>
-              login
+              log in
             </Button>
           </Box>
         </Box>

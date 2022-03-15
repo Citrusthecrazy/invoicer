@@ -37,7 +37,10 @@ const Register: NextPage = () => {
           />
           <Box className={styles.formFooter}>
             <p style={{ fontSize: ".8rem" }}>
-              Already have an account? <Link href="/login">Login</Link>
+              Already have an account?{" "}
+              <Link href="/login">
+                <span className={styles.link}>Log in</span>
+              </Link>
             </p>
             <Button
               variant="contained"

@@ -43,3 +43,12 @@
   justify-content: space-between;
   width: 73%;
 }
+
+.link {
+  color: #6b8cff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+}
