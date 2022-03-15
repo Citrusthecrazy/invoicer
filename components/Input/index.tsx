@@ -13,7 +13,7 @@ export default styled(TextField)({
       },
     },
     "&.Mui-focused fieldset": {
-      border: "2px solid #5163AE",
+      border: "2px solid #6B8CFF",
     },
   },
 });
