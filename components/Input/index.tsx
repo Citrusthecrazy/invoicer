@@ -12,5 +12,8 @@ export default styled(TextField)({
         border: "1px solid rgba(0,0,0,0.25)",
       },
     },
+    "&.Mui-focused fieldset": {
+      border: "2px solid #5163AE",
+    },
   },
 });
