@@ -1,15 +1,15 @@
-import styles from "./Login.module.css";
+import styles from "./Register.module.css";
 import { Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { NextPage } from "next";
 import Image from "next/image";
 import logo from "../../assets/No Bg Logo.png";
-import receiptIllustration from "../../assets/receipt.svg";
+import printingInvoices from "../../assets/printing-invoices.svg";
 import { useTheme } from "styled-components";
 import Input from "../../components/Input";
 import Link from "next/link";
 
-const index: NextPage = () => {
+const Register: NextPage = () => {
   const theme = useTheme() as any;
 
   return (
@@ -29,9 +29,15 @@ const index: NextPage = () => {
             type="password"
             placeholder="Password"
           />
+          <Input
+            className={styles.input}
+            variant="outlined"
+            type="password"
+            placeholder="Confirm password"
+          />
           <Box className={styles.formFooter}>
             <p style={{ fontSize: ".8rem" }}>
-              Don't have an account? <Link href="/register">Register now</Link>
+              Already have an account? <Link href="/login">Login</Link>
             </p>
             <Button
               variant="contained"
@@ -39,16 +45,16 @@ const index: NextPage = () => {
                 backgroundColor: theme.colors.primary,
                 borderRadius: "10px",
               }}>
-              login
+              Register
             </Button>
           </Box>
         </Box>
         <Box className={styles.imageContainer}>
-          <Image src={receiptIllustration} height="313px" width="445px" />
+          <Image src={printingInvoices} height="313px" width="445px" />
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default index;
+export default Register;
