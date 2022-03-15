@@ -39,17 +39,19 @@ const Home: NextPage = () => {
         className={styles.paper}
         elevation={4}
         sx={{ gridColumn: "1/1", gridRow: "span 4" }}>
-        <Typography
-          sx={{ fontSize: "2rem", fontWeight: "bold" }}
-          textAlign="center">
-          Recent Invoices
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          textAlign="center"
-          sx={{ color: "rgba(0,0,0,0.4)" }}>
-          Nothing to show here
-        </Typography>
+        <Box sx={{ padding: "0.5rem" }}>
+          <Typography
+            sx={{ fontSize: "2rem", fontWeight: "bold" }}
+            textAlign="center">
+            Recent Invoices
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            textAlign="center"
+            sx={{ color: "rgba(0,0,0,0.4)" }}>
+            Nothing to show here
+          </Typography>
+        </Box>
       </Paper>
 
       <Box
@@ -83,17 +85,19 @@ const Home: NextPage = () => {
                 }
               : { flex: "50", marginBottom: ".5rem" }
           }>
-          <Typography
-            sx={{ fontSize: "2rem", fontWeight: "bold" }}
-            textAlign="center">
-            Top Items
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            textAlign="center"
-            sx={{ color: "rgba(0,0,0,0.4)" }}>
-            Nothing to show here
-          </Typography>
+          <Box sx={{ padding: "0.5rem" }}>
+            <Typography
+              sx={{ fontSize: "2rem", fontWeight: "bold" }}
+              textAlign="center">
+              Top Items
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              textAlign="center"
+              sx={{ color: "rgba(0,0,0,0.4)" }}>
+              Nothing to show here
+            </Typography>
+          </Box>
         </Paper>
 
         <Paper
@@ -109,17 +113,19 @@ const Home: NextPage = () => {
                 }
               : { flex: "50", marginTop: ".5rem" }
           }>
-          <Typography
-            sx={{ fontSize: "2rem", fontWeight: "bold" }}
-            textAlign="center">
-            Top Customers
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            textAlign="center"
-            sx={{ color: "rgba(0,0,0,0.4)" }}>
-            Nothing to show here
-          </Typography>
+          <Box sx={{ padding: "0.5rem" }}>
+            <Typography
+              sx={{ fontSize: "2rem", fontWeight: "bold" }}
+              textAlign="center">
+              Top Customers
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              textAlign="center"
+              sx={{ color: "rgba(0,0,0,0.4)" }}>
+              Nothing to show here
+            </Typography>
+          </Box>
         </Paper>
       </Box>
     </div>

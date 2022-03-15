@@ -1,6 +1,7 @@
-import { AiFillHome, AiFillFileAdd } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai";
 import { IoStorefront } from "react-icons/io5";
 import { BsPeopleFill } from "react-icons/bs";
+import { FaFileInvoice } from "react-icons/fa";
 const items = [
   {
     text: "Home",
@@ -12,13 +13,13 @@ const items = [
     path: "/",
   },
   {
-    text: "New Invoice",
+    text: "Invoices",
     icon: (
-      <AiFillFileAdd
+      <FaFileInvoice
         style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
       />
     ),
-    path: "/invoices/new",
+    path: "/invoices",
   },
   {
     text: "Products",

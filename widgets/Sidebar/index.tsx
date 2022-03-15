@@ -22,7 +22,12 @@ const index = () => {
           <Link key={index} href={item.path}>
             <ListItemButton
               disableRipple
-              sx={{ "&:hover": { background: "rgba(107, 140, 255, 0.2)" } }}
+              sx={{
+                "&:hover":
+                  item.path === router.pathname
+                    ? { background: "rgba(107, 140, 255, 0.4)" }
+                    : { background: "transparent" },
+              }}
               className={
                 item.path === router.pathname
                   ? styles.listItemActive
@@ -41,7 +46,7 @@ const index = () => {
         <ListItemButton
           disableRipple
           className={styles.listItem}
-          sx={{ "&:hover": { background: "rgba(107, 140, 255, 0.2)" } }}>
+          sx={{ "&:hover": { background: "rgba(255, 100, 150, 0.3)" } }}>
           <ListItemIcon>
             <IoLogOut
               style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
