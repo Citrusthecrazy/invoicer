@@ -18,7 +18,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             display: "flex",
             flexDirection: "row",
           }}>
-          {/* <Sidebar /> */}
+          <Sidebar />
           <Component {...pageProps} />
         </div>
       </ThemeProvider>
