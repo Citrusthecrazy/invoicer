@@ -25,7 +25,7 @@ const index = ({ image, name, streetAddress, phoneNumber }: Props) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            marginBottom: "1rem",
+            marginBottom: "1.5rem",
           }}>
           <Avatar
             sx={{
@@ -39,7 +39,7 @@ const index = ({ image, name, streetAddress, phoneNumber }: Props) => {
               name.substring(0, 1)
             )}
           </Avatar>
-          <Typography variant="h6" fontWeight="medium">
+          <Typography variant="h6" fontWeight="medium" sx={{ height: "2em" }}>
             {name}
           </Typography>
         </Box>
