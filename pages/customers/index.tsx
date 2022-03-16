@@ -1,9 +1,10 @@
 import { Box, Fab, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import styles from "./Products.module.css";
+import styles from "./Customers.module.css";
 import CustomerCard from "../../components/CustomerCard";
 import { faker } from "@faker-js/faker";
 import { FaPlus } from "react-icons/fa";
+
 const Customers = () => {
   return (
     <Box className={styles.container}>
@@ -25,51 +26,6 @@ const Customers = () => {
           />
           <CustomerCard
             image={faker.image.avatar()}
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
-            name={faker.name.findName()}
-            streetAddress={faker.address.streetAddress()}
-            phoneNumber={faker.phone.phoneNumberFormat()}
-          />
-          <CustomerCard
             name={faker.name.findName()}
             streetAddress={faker.address.streetAddress()}
             phoneNumber={faker.phone.phoneNumberFormat()}
