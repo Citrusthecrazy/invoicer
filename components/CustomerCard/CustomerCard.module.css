@@ -1,0 +1,29 @@
+.card {
+  width: 300;
+  max-height: 225;
+}
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar {
+  background-color: #6b8cff;
+  margin-right: 1rem;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.customerName {
+  height: 2em;
+}
+
+.customerInfo {
+  height: 2em;
+  display: block;
+  margin-bottom: 0px;
+}

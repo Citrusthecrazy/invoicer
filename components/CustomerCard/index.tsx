@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./CustomerCard.module.css";
 import {
   Avatar,
   Box,
@@ -18,43 +19,27 @@ type Props = {
 };
 const index = ({ image, name, streetAddress, phoneNumber }: Props) => {
   return (
-    <Card sx={{ width: 300, maxHeight: 225 }} elevation={4}>
+    <Card className={styles.card} elevation={4}>
       <CardContent>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: "1.5rem",
-          }}>
-          <Avatar
-            sx={{
-              bgcolor: "#6b8cff",
-              marginRight: "1rem",
-            }}
-            aria-label="user avatar">
+        <Box className={styles.cardHeader}>
+          <Avatar className={styles.avatar} aria-label="user avatar">
             {image ? (
-              <img src={image} style={{ width: "100%", height: "100%" }} />
+              <img src={image} className={styles.image} />
             ) : (
               name.substring(0, 1)
             )}
           </Avatar>
-          <Typography variant="h6" fontWeight="medium" sx={{ height: "2em" }}>
+          <Typography
+            variant="h6"
+            fontWeight="medium"
+            className={styles.customerName}>
             {name}
           </Typography>
         </Box>
-        <Typography
-          variant="subtitle1"
-          sx={{ height: "2em", wordWrap: "wrap" }}
-          gutterBottom>
-          Address: {streetAddress}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{ height: "2em", wordWrap: "wrap" }}
-          gutterBottom>
-          Phone number: {phoneNumber}
-        </Typography>
+        <p className={styles.customerInfo}>
+          Address: {streetAddress} asd asd asd as dasd a
+        </p>
+        <p className={styles.customerInfo}>Phone number: {phoneNumber}</p>
       </CardContent>
       <CardActions>
         <Button startIcon={<FaPen />} disableRipple sx={{ color: "#6b8cff" }}>

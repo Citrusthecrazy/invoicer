@@ -39,6 +39,51 @@ const Customers = () => {
             streetAddress={faker.address.streetAddress()}
             phoneNumber={faker.phone.phoneNumberFormat()}
           />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
+          <CustomerCard
+            name={faker.name.findName()}
+            streetAddress={faker.address.streetAddress()}
+            phoneNumber={faker.phone.phoneNumberFormat()}
+          />
         </Box>
         <Tooltip title="New Customer" placement="left" arrow disableInteractive>
           <Fab className={styles.floatingButton} aria-label="add">
