@@ -3,130 +3,155 @@ import { Box } from "@mui/system";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import { useMediaQuery } from "@mui/material";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { faker } from "@faker-js/faker";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+const labels = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: "Sale",
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+  ],
+};
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: "Recent sales",
+    },
+  },
+};
 const Home: NextPage = () => {
-  const media = useMediaQuery("(max-width:1280px)");
+  const media = useMediaQuery("(max-width:768px)");
+
   return (
     <div className={styles.home}>
-      <Paper
-        className={styles.paper}
-        elevation={4}
+      <Box
         sx={{
-          gridColumn: "span 1",
+          flex: "25",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          padding: "1rem",
         }}>
-        <Typography variant="caption" fontSize="1.25rem" textAlign="center">
-          Total sales in the past week
-        </Typography>
-        <Typography
-          sx={{ fontSize: "3rem", fontWeight: "bold" }}
-          textAlign="center">
-          170.00K €
-        </Typography>
-      </Paper>
+        <Paper
+          elevation={4}
+          className={styles.paper}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: "20",
+          }}>
+          <Typography variant="h6" textAlign="center">
+            Recent sales
+          </Typography>
+          <Typography variant="h3" fontWeight="bold" textAlign="center">
+            140.00K €
+          </Typography>
+        </Paper>
 
-      <Paper
-        className={styles.paper}
-        elevation={4}
-        sx={!media ? { gridColumn: "3 / main-end", gridRow: "span 2" } : null}>
-        Chart
-      </Paper>
-
-      <Paper
-        className={styles.paper}
-        elevation={4}
-        sx={{ gridColumn: "1/1", gridRow: "span 4" }}>
-        <Box sx={{ padding: "0.5rem" }}>
-          <Typography
-            sx={{ fontSize: "2rem", fontWeight: "bold" }}
-            textAlign="center">
-            Recent Invoices
+        <Paper elevation={4} className={styles.paper} sx={{ flex: "80" }}>
+          <Typography variant="h4" textAlign="center" fontWeight="bold">
+            Recent invoices
           </Typography>
           <Typography
             variant="subtitle1"
-            textAlign="center"
-            sx={{ color: "rgba(0,0,0,0.4)" }}>
-            Nothing to show here
+            sx={{ color: "rgba(0,0,0,0.5)" }}
+            textAlign="center">
+            Nothing to show
           </Typography>
-        </Box>
-      </Paper>
-
+        </Paper>
+      </Box>
       <Box
-        sx={
-          !media
-            ? {
-                display: "flex",
-                flexDirection: "row",
-                gridColumn: "3 / main-end",
-                gridRow: "span 3",
-                height: "95%",
-                paddingY: "1rem",
-              }
-            : {
-                display: "flex",
-                flexDirection: "column",
-                gridRow: "span 4",
-                height: "95%",
-              }
-        }>
+        sx={{
+          flex: "75",
+          display: "flex",
+          flexDirection: "column",
+          padding: "1rem",
+        }}>
         <Paper
-          className={styles.paper}
+          className={styles.paper + " " + styles.chart}
           elevation={4}
-          sx={
-            !media
-              ? {
-                  flex: "50",
-                  gridColumn: "3",
-                  gridRow: "span calc(main-end/2)",
-                  marginRight: ".5rem",
-                }
-              : { flex: "50", marginBottom: ".5rem" }
-          }>
-          <Box sx={{ padding: "0.5rem" }}>
-            <Typography
-              sx={{ fontSize: "2rem", fontWeight: "bold" }}
-              textAlign="center">
+          sx={{ flex: "40" }}>
+          <Line
+            options={options}
+            data={data}
+            style={{ maxHeight: "22rem", maxWidth: "100%" }}
+          />
+        </Paper>
+        <Box
+          sx={{
+            flex: "60",
+            display: "flex",
+            flexDirection: media ? "column" : "row",
+            padding: "1rem",
+          }}>
+          <Paper
+            className={styles.paper}
+            elevation={4}
+            sx={{ flex: "50", marginRight: ".5rem" }}>
+            <Typography variant="h4" textAlign="center" fontWeight="bold">
               Top Items
             </Typography>
             <Typography
               variant="subtitle1"
-              textAlign="center"
-              sx={{ color: "rgba(0,0,0,0.4)" }}>
-              Nothing to show here
-            </Typography>
-          </Box>
-        </Paper>
-
-        <Paper
-          className={styles.paper}
-          elevation={4}
-          sx={
-            !media
-              ? {
-                  flex: "50",
-                  gridColumn: "4",
-                  gridRow: "span calc(main-end/2)",
-                  marginLeft: ".5rem",
-                }
-              : { flex: "50", marginTop: ".5rem" }
-          }>
-          <Box sx={{ padding: "0.5rem" }}>
-            <Typography
-              sx={{ fontSize: "2rem", fontWeight: "bold" }}
+              sx={{ color: "rgba(0,0,0,0.5)" }}
               textAlign="center">
+              Nothing to show
+            </Typography>
+          </Paper>
+          <Paper
+            className={styles.paper}
+            elevation={4}
+            sx={{ flex: "50", marginLeft: ".5rem" }}>
+            <Typography variant="h4" textAlign="center" fontWeight="bold">
               Top Customers
             </Typography>
             <Typography
               variant="subtitle1"
-              textAlign="center"
-              sx={{ color: "rgba(0,0,0,0.4)" }}>
-              Nothing to show here
+              sx={{ color: "rgba(0,0,0,0.5)" }}
+              textAlign="center">
+              Nothing to show
             </Typography>
-          </Box>
-        </Paper>
+          </Paper>
+        </Box>
       </Box>
     </div>
   );

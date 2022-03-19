@@ -36,9 +36,7 @@ const index = ({ image, name, streetAddress, phoneNumber }: Props) => {
             {name}
           </Typography>
         </Box>
-        <p className={styles.customerInfo}>
-          Address: {streetAddress} asd asd asd as dasd a
-        </p>
+        <p className={styles.customerInfo}>Address: {streetAddress}</p>
         <p className={styles.customerInfo}>Phone number: {phoneNumber}</p>
       </CardContent>
       <CardActions>
