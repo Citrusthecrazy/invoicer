@@ -15,6 +15,7 @@
     "@types/styled-components": "^5.1.24",
     "chart.js": "^3.7.1",
     "easyinvoice": "^2.3.0",
+    "firebase": "^9.6.9",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.1",

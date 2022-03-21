@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Products.module.css";
 import { Box, Typography, Tooltip, Fab } from "@mui/material";
 import ProductCard from "../../components/ProductCard";
 import { faker } from "@faker-js/faker";
 import { FaPlus } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 const index = () => {
+  const user = useContext(AuthContext);
+  const router = useRouter();
+
   return (
     <Box className={styles.container}>
       <Box className={styles.wrapper}>

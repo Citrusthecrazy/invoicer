@@ -33,7 +33,7 @@ const Invoices = () => {
     reset();
   };
   const renderInvoice = async () => {
-    let products: Array<any> = [];
+    let products: Array<InvoiceProduct | any> = [];
     items.forEach(
       (item) =>
         (products = [

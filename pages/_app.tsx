@@ -1,18 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Sidebar from "../widgets/Sidebar";
-import { ThemeProvider } from "styled-components";
-
-const theme = {
-  colors: {
-    primary: "#6b8cff",
-  },
-};
+import { AuthProvider } from "../providers/AuthProvider";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <AuthProvider>
         <div
           style={{
             display: "flex",
@@ -21,7 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Sidebar />
           <Component {...pageProps} />
         </div>
-      </ThemeProvider>
+      </AuthProvider>
     </>
   );
 };

@@ -5,15 +5,21 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Sidebar.module.css";
 import SidebarItems from "./SidebarItems";
 import { IoLogOut } from "react-icons/io5";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { AuthContext } from "../../contexts/AuthContext";
+import { logout } from "../../util/AuthFunctions";
 
 const index = () => {
   const router = useRouter();
+  const user = useContext(AuthContext);
+  if (!user) {
+    return null;
+  }
   return (
     <nav className={styles.sidebar}>
       <div className={styles.logo} />
@@ -46,7 +52,8 @@ const index = () => {
         <ListItemButton
           disableRipple
           className={styles.listItem}
-          sx={{ "&:hover": { background: "rgba(255, 100, 150, 0.3)" } }}>
+          sx={{ "&:hover": { background: "rgba(255, 100, 150, 0.3)" } }}
+          onClick={() => logout()}>
           <ListItemIcon>
             <IoLogOut
               style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
