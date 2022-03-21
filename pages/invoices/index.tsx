@@ -14,6 +14,7 @@ import CustomButton from "../../components/CustomButton";
 import Input from "../../components/Input";
 import styles from "./Invoices.module.css";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import easyinvoice, { InvoiceProduct } from "easyinvoice";
 
 interface Item {
   product: string;
@@ -29,7 +30,55 @@ const Invoices = () => {
   const onSubmit: SubmitHandler<Item> = (data) => {
     console.log(data);
     setItems((items) => [...items, data]);
-    // reset();
+    reset();
+  };
+  const renderInvoice = async () => {
+    let products: Array<any> = [];
+    items.forEach(
+      (item) =>
+        (products = [
+          ...products,
+          {
+            quantity: item.quantity,
+            description: item.product,
+            price: Number(item.price),
+            "tax-rate": Number(item.tax),
+          },
+        ])
+    );
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    const todayString = dd + "/" + mm + "/" + yyyy;
+    const data = {
+      sender: {
+        company: "Sample Corp",
+        address: "Sample Street 123",
+        zip: "1234 AB",
+        city: "Sampletown",
+        country: "Samplecountry",
+      },
+      client: {
+        company: "Client Corp",
+        address: "Clientstreet 456",
+        zip: "4567 CD",
+        city: "Clientcity",
+        country: "Clientcountry",
+      },
+      information: {
+        number: "2021.0001",
+        date: todayString,
+      },
+      products: products,
+      settings: {
+        currency: "EUR",
+        "tax-notation": "PDV",
+      },
+    };
+    const result = await easyinvoice.createInvoice(data);
+    await easyinvoice.download("era.pdf", result.pdf);
   };
   return (
     <Box className={styles.container}>
@@ -50,13 +99,13 @@ const Invoices = () => {
           </Typography>
           <Box className={styles.addedItems}>
             {items.length > 0 && (
-              <div className={styles.header}>
+              <Box className={styles.header}>
                 <Box className={styles.item}>Product</Box>
                 <Box className={styles.item}>Quantity</Box>
-                <Box className={styles.item}>Price</Box>
+                <Box className={styles.item}>Price per unit</Box>
                 <Box className={styles.item}>Tax</Box>
                 <Box className={styles.iconButton}></Box>
-              </div>
+              </Box>
             )}
             {items.length > 0
               ? items.map((item, key) => (
@@ -70,7 +119,7 @@ const Invoices = () => {
                     }}>
                     <Box className={styles.item}>{item.product}</Box>
                     <Box className={styles.item}>{item.quantity}</Box>
-                    <Box className={styles.item}>{item.price}</Box>
+                    <Box className={styles.item}>{item.price} €</Box>
                     <Box className={styles.item}>{item.tax}%</Box>
                     <IconButton
                       disableRipple
@@ -165,13 +214,16 @@ const Invoices = () => {
             <CustomButton variant="contained" className={styles.button}>
               Download
             </CustomButton>
-            <CustomButton variant="contained" className={styles.button}>
+            <CustomButton
+              variant="contained"
+              className={styles.button}
+              onClick={() => renderInvoice()}>
               Preview
             </CustomButton>
           </Box>
         </Paper>
         <Paper className={styles.paper} elevation={4}>
-          Pera
+          <Box id="pdf"></Box>
         </Paper>
       </Box>
     </Box>
