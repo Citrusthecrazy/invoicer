@@ -25,6 +25,26 @@
   margin-bottom: 1rem;
 }
 
+.addedItems {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+.item {
+  flex: 25;
+  margin: 0.5rem;
+  display: grid;
+  place-content: center;
+}
 .newItem {
   width: 100%;
   display: flex;
@@ -45,7 +65,14 @@
   background-color: green;
   border-radius: 100%;
 }
-
+.buttonIconRemove {
+  height: 2rem;
+  width: 2rem;
+  color: white;
+  background-color: red;
+  border-radius: 100%;
+  transform: rotate(45deg);
+}
 .actions {
   display: flex;
   flex-direction: row;
