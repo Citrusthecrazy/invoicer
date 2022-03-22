@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Products.module.css";
 import { Box, Typography, Tooltip, Fab } from "@mui/material";
 import ProductCard from "../../components/ProductCard";
 import { faker } from "@faker-js/faker";
 import { FaPlus } from "react-icons/fa";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useRouter } from "next/router";
+import withAuth from "../../helpers/withAuth";
 
-const index = () => {
-  const user = useContext(AuthContext);
-  const router = useRouter();
-
+const Products = () => {
   return (
     <Box className={styles.container}>
       <Box className={styles.wrapper}>
@@ -35,4 +31,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default withAuth(Products);

@@ -15,7 +15,7 @@ import Input from "../../components/Input";
 import styles from "./Invoices.module.css";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import easyinvoice, { InvoiceProduct } from "easyinvoice";
-
+import withAuth from "../../helpers/withAuth";
 interface Item {
   product: string;
   quantity: string;
@@ -230,4 +230,4 @@ const Invoices = () => {
   );
 };
 
-export default Invoices;
+export default withAuth(Invoices);

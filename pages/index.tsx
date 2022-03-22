@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import withAuth from "../helpers/withAuth";
 
 ChartJS.register(
   CategoryScale,
@@ -157,4 +158,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

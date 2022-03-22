@@ -4,6 +4,7 @@ import styles from "./Customers.module.css";
 import CustomerCard from "../../components/CustomerCard";
 import { faker } from "@faker-js/faker";
 import { FaPlus } from "react-icons/fa";
+import withAuth from "../../helpers/withAuth";
 
 const Customers = () => {
   return (
@@ -51,4 +52,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default withAuth(Customers);

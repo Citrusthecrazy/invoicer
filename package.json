@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
+    "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.0",
     "@types/styled-components": "^5.1.24",
     "chart.js": "^3.7.1",
     "easyinvoice": "^2.3.0",
+    "emotion": "^11.0.0",
     "firebase": "^9.6.9",
     "next": "12.1.0",
     "react": "17.0.2",

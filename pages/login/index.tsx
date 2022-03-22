@@ -9,7 +9,9 @@ import Input from "../../components/Input";
 import Link from "next/link";
 import { login } from "../../util/AuthFunctions";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useRouter } from "next/router";
 interface Login {
   email: string;
   password: string;
@@ -17,9 +19,10 @@ interface Login {
 
 const index: NextPage = () => {
   const { control, reset, handleSubmit } = useForm<Login>();
-
+  const router = useRouter();
   const onSubmit: SubmitHandler<Login> = async (data) => {
     await login(data.email, data.password);
+    await router.push("/");
   };
   return (
     <Box className={styles.page}>
