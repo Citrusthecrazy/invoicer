@@ -1,6 +1,6 @@
 .card {
-  width: 300px;
-  max-width: 350px;
+  width: 18rem;
+  max-width: 20rem;
 }
 .cardHeader {
   display: flex;
@@ -23,7 +23,5 @@
 }
 
 .customerInfo {
-  height: 2em;
-  display: block;
   margin-bottom: 0px;
 }

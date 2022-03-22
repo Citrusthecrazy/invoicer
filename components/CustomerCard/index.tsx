@@ -12,32 +12,31 @@ import {
 import { FaTrash, FaPen } from "react-icons/fa";
 
 type Props = {
-  image?: string;
-  name: string;
-  streetAddress: string;
-  phoneNumber: string;
+  companyName: string;
+  address: string;
+  zip: string;
+  city: string;
+  country: string;
 };
-const index = ({ image, name, streetAddress, phoneNumber }: Props) => {
+const index = ({ companyName, address, zip, city, country }: Props) => {
   return (
     <Card className={styles.card} elevation={4}>
       <CardContent>
         <Box className={styles.cardHeader}>
           <Avatar className={styles.avatar} aria-label="user avatar">
-            {image ? (
-              <img src={image} className={styles.image} />
-            ) : (
-              name.substring(0, 1)
-            )}
+            {companyName.substring(0, 1)}
           </Avatar>
           <Typography
             variant="h6"
             fontWeight="medium"
             className={styles.customerName}>
-            {name}
+            {companyName}
           </Typography>
         </Box>
-        <p className={styles.customerInfo}>Address: {streetAddress}</p>
-        <p className={styles.customerInfo}>Phone number: {phoneNumber}</p>
+        <p className={styles.customerInfo}>Address: {address}</p>
+        <p className={styles.customerInfo}>Zip: {zip}</p>
+        <p className={styles.customerInfo}>City: {city}</p>
+        <p className={styles.customerInfo}>Country: {country}</p>
       </CardContent>
       <CardActions>
         <Button startIcon={<FaPen />} disableRipple sx={{ color: "#6b8cff" }}>

@@ -13,7 +13,6 @@ const withAuth = (Component: any) => {
     }
     componentDidMount() {
       auth.onAuthStateChanged((authUser) => {
-        console.log(authUser);
         if (authUser) {
           this.setState({ status: "SIGNED_IN" });
         } else {

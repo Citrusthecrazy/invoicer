@@ -33,3 +33,7 @@
 .floatingButton:hover {
   background-color: hsl(227, 100%, 67%);
 }
+
+.stack {
+  margin-bottom: 1rem;
+}

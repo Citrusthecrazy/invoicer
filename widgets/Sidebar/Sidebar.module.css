@@ -23,7 +23,7 @@
 
 .listItem {
   max-height: 3.5rem;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   margin-bottom: 0.25rem;
 }
 
