@@ -11,15 +11,18 @@ import SidebarItems from "./SidebarItems";
 import { IoLogOut } from "react-icons/io5";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { AuthContext } from "../../contexts/AuthContext";
 import { logout } from "../../util/AuthFunctions";
+import withAuth from "../../helpers/withAuth";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const index = () => {
   const router = useRouter();
   const user = useContext(AuthContext);
-  if (!user) {
-    return null;
-  }
+  const handleLogout = async () => {
+    await logout();
+    router.push("/login");
+  };
+  if (!user) return null;
   return (
     <nav className={styles.sidebar}>
       <div className={styles.logo} />
@@ -53,7 +56,7 @@ const index = () => {
           disableRipple
           className={styles.listItem}
           sx={{ "&:hover": { background: "rgba(255, 100, 150, 0.3)" } }}
-          onClick={() => logout()}>
+          onClick={() => handleLogout()}>
           <ListItemIcon>
             <IoLogOut
               style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
@@ -68,4 +71,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default withAuth(index);

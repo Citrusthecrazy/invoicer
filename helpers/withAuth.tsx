@@ -25,7 +25,7 @@ const withAuth = (Component: any) => {
     renderContent() {
       const { status } = this.state;
       if (status === "LOADING") {
-        return <h1>Loading...</h1>;
+        return null;
       } else if (status === "SIGNED_IN") {
         return <Component {...this.props} />;
       }

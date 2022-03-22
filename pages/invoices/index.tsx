@@ -54,11 +54,11 @@ const Invoices = () => {
     const todayString = dd + "/" + mm + "/" + yyyy;
     const data = {
       sender: {
-        company: "Sample Corp",
-        address: "Sample Street 123",
-        zip: "1234 AB",
-        city: "Sampletown",
-        country: "Samplecountry",
+        company: "Drakula Inc",
+        address: "Ustanicka 123",
+        zip: "11000",
+        city: "Belgrade",
+        country: "Serbia",
       },
       client: {
         company: "Client Corp",
@@ -89,7 +89,7 @@ const Invoices = () => {
         <Paper className={styles.paper} elevation={4}>
           <FormControl className={styles.formControl}>
             <InputLabel>Select Recipient</InputLabel>
-            <Select>
+            <Select label="Select recipient">
               <MenuItem>Era</MenuItem>
               <MenuItem>Pera</MenuItem>
             </Select>
@@ -146,7 +146,7 @@ const Invoices = () => {
                   <Input
                     {...field}
                     sx={{ flex: 25, margin: ".5rem" }}
-                    placeholder="Product"
+                    label="Product"
                   />
                 )}
               />
@@ -159,7 +159,7 @@ const Invoices = () => {
                   <Input
                     {...field}
                     sx={{ flex: 25, margin: ".5rem" }}
-                    placeholder="Quantity"
+                    label="Quantity"
                   />
                 )}
               />
@@ -173,7 +173,7 @@ const Invoices = () => {
                   <Input
                     {...field}
                     sx={{ flex: 25, margin: ".5rem" }}
-                    placeholder="Price"
+                    label="Price"
                   />
                 )}
               />
@@ -187,7 +187,7 @@ const Invoices = () => {
                   <Input
                     {...field}
                     sx={{ flex: 25, margin: ".5rem" }}
-                    placeholder="Tax (%)"
+                    label="Tax (%)"
                   />
                 )}
               />

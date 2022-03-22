@@ -1,5 +1,4 @@
 import { AiFillHome } from "react-icons/ai";
-import { IoStorefront } from "react-icons/io5";
 import { BsPeopleFill } from "react-icons/bs";
 import { FaFileInvoice } from "react-icons/fa";
 const items = [
@@ -20,15 +19,6 @@ const items = [
       />
     ),
     path: "/invoices",
-  },
-  {
-    text: "Products",
-    icon: (
-      <IoStorefront
-        style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
-      />
-    ),
-    path: "/products",
   },
   {
     text: "Customers",
