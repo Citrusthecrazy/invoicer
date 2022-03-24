@@ -6,7 +6,7 @@ import CustomButton from "../../components/CustomButton";
 import Input from "../../components/Input";
 import styles from "./Invoices.module.css";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import easyinvoice, { InvoiceProduct } from "easyinvoice";
+import easyinvoice, { download, InvoiceProduct } from "easyinvoice";
 import withAuth from "../../helpers/withAuth";
 import { getCustomerById, getCustomers } from "../../util/DbFunctions";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -25,9 +25,8 @@ const Invoices = () => {
   const [items, setItems] = useState<Array<Item>>([]);
   const [options, setOptions] = useState<Array<any>>([]);
   const [inputValue, setInputValue] = useState("");
-  const [selectedCustomer, setSelectedCustomer] = useState<DocumentData | null>(
-    options[0]
-  );
+  const [selectedCustomer, setSelectedCustomer] =
+    useState<DocumentData | null>();
   useEffect(() => {
     if (!user) return;
     getCustomers(user).then((customers) => {
@@ -40,16 +39,16 @@ const Invoices = () => {
       );
     });
   }, [user]);
+
   const handleSetCustomer = async (id: string) => {
     const customer = await getCustomerById(id);
     setSelectedCustomer(customer);
   };
   const onSubmit: SubmitHandler<Item> = (data) => {
-    console.log(data);
     setItems((items) => [...items, data]);
     reset();
   };
-  const renderInvoice = async () => {
+  const downloadInvoice = async () => {
     let products: Array<InvoiceProduct | any> = [];
     items.forEach(
       (item) =>
@@ -106,7 +105,7 @@ const Invoices = () => {
         <Paper className={styles.paper} elevation={4}>
           <Autocomplete
             onChange={(event: any, newValue) => {
-              if (!newValue || !newValue.id) return;
+              if (!newValue || !newValue.id) return setSelectedCustomer(null);
               handleSetCustomer(newValue.id);
             }}
             inputValue={inputValue}
@@ -236,22 +235,20 @@ const Invoices = () => {
             sx={{ width: "50%" }}
           />
           <Box className={styles.actions}>
-            <CustomButton variant="contained" className={styles.button}>
+            <CustomButton
+              disabled={!selectedCustomer || items.length === 0}
+              variant="contained"
+              className={styles.button}>
               Save
             </CustomButton>
-            <CustomButton variant="contained" className={styles.button}>
-              Download
-            </CustomButton>
             <CustomButton
+              disabled={!selectedCustomer || items.length === 0}
               variant="contained"
               className={styles.button}
-              onClick={() => renderInvoice()}>
-              Preview
+              onClick={() => downloadInvoice()}>
+              Download
             </CustomButton>
           </Box>
-        </Paper>
-        <Paper className={styles.paper} elevation={4}>
-          <Box id="pdf"></Box>
         </Paper>
       </Box>
     </Box>

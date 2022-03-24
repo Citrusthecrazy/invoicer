@@ -8,12 +8,11 @@
 .content {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex: 1;
 }
 
 .paper {
-  flex: 50;
   margin: 0.5rem;
   padding: 1rem;
   display: flex;
