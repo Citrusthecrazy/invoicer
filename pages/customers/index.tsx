@@ -24,6 +24,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Customer } from "../../util/types";
 
 interface IDialog {
+  id: string;
   companyName: string;
   address: string;
   zip: string;
@@ -43,6 +44,7 @@ const Customers = () => {
     const userRef = await getUserRef(user);
     if (!userRef || !data.zip) return;
     const customer: Customer = {
+      id: data.id,
       companyName: data.companyName,
       address: data.address,
       city: data.city,
@@ -80,6 +82,7 @@ const Customers = () => {
         <Box className={styles.grid}>
           {customers.map((customer, key) => (
             <CustomerCard
+              id={customer.id}
               key={key}
               companyName={customer.companyName}
               address={customer.address}

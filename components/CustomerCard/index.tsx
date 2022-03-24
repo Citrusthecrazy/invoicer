@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./CustomerCard.module.css";
 import {
   Avatar,
@@ -12,13 +12,19 @@ import {
 import { FaTrash, FaPen } from "react-icons/fa";
 
 type Props = {
+  id: string;
   companyName: string;
   address: string;
   zip: string;
   city: string;
   country: string;
 };
-const index = ({ companyName, address, zip, city, country }: Props) => {
+
+const index = ({ id, companyName, address, zip, city, country }: Props) => {
+  useEffect(() => {
+    console.log(id);
+  }, []);
+
   return (
     <Card className={styles.card} elevation={4}>
       <CardContent>
