@@ -32,6 +32,7 @@ const Invoices = () => {
   const [inputValue, setInputValue] = useState("");
   const [selectedCustomer, setSelectedCustomer] =
     useState<DocumentData | null>();
+  const [note, setNote] = useState("");
   useEffect(() => {
     if (!user) return;
     getCustomers(user).then((customers) => {
@@ -93,6 +94,7 @@ const Invoices = () => {
         date: todayString,
       },
       products: products,
+      "bottom-notice": note,
       settings: {
         currency: "EUR",
         "tax-notation": "PDV",
@@ -266,6 +268,8 @@ const Invoices = () => {
             rows={5}
             placeholder="Note (optional)"
             sx={{ width: "50%" }}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
           />
           <Box className={styles.actions}>
             <CustomButton

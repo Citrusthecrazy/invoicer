@@ -12,7 +12,7 @@ const items = [
     path: "/",
   },
   {
-    text: "Invoices",
+    text: "New Invoice",
     icon: (
       <FaFileInvoice
         style={{ width: "1.5rem", height: "1.5rem", color: "black" }}
