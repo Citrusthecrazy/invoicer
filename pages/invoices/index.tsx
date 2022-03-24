@@ -21,7 +21,12 @@ interface Item {
 
 const Invoices = () => {
   const user = useContext(AuthContext);
-  const { control, reset, handleSubmit } = useForm<Item>();
+  const {
+    control,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Item>();
   const [items, setItems] = useState<Array<Item>>([]);
   const [options, setOptions] = useState<Array<any>>([]);
   const [inputValue, setInputValue] = useState("");
@@ -84,7 +89,7 @@ const Invoices = () => {
         country: selectedCustomer?.country,
       },
       information: {
-        number: "2021.0001",
+        number: `${yyyy}.${Math.floor(Math.random() * 999999)}`,
         date: todayString,
       },
       products: products,
@@ -168,10 +173,14 @@ const Invoices = () => {
                 name="product"
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{
+                  required: { value: true, message: "Please fill this field" },
+                }}
                 render={({ field }) => (
                   <Input
                     {...field}
+                    error={errors?.product ? true : false}
+                    helperText={errors?.product?.message}
                     sx={{ flex: 25, margin: ".5rem" }}
                     label="Product"
                   />
@@ -181,10 +190,18 @@ const Invoices = () => {
                 name="quantity"
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{
+                  required: { value: true, message: "Please fill this field" },
+                  pattern: {
+                    value: /^[1-9]\d*(\d+)?$/i,
+                    message: "Please enter a number",
+                  },
+                }}
                 render={({ field }) => (
                   <Input
                     {...field}
+                    error={errors?.quantity ? true : false}
+                    helperText={errors?.quantity?.message}
                     sx={{ flex: 25, margin: ".5rem" }}
                     label="Quantity"
                   />
@@ -195,10 +212,18 @@ const Invoices = () => {
                 name="price"
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{
+                  required: { value: true, message: "Please fill this field" },
+                  pattern: {
+                    value: /^[1-9]\d*(\d+)?$/i,
+                    message: "Please enter a number",
+                  },
+                }}
                 render={({ field }) => (
                   <Input
                     {...field}
+                    error={errors?.price ? true : false}
+                    helperText={errors?.price?.message}
                     sx={{ flex: 25, margin: ".5rem" }}
                     label="Price"
                   />
@@ -209,10 +234,18 @@ const Invoices = () => {
                 name="tax"
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{
+                  required: { value: true, message: "Please fill this field" },
+                  pattern: {
+                    value: /^[1-9]\d*(\d+)?$/i,
+                    message: "Please enter a number",
+                  },
+                }}
                 render={({ field }) => (
                   <Input
                     {...field}
+                    error={errors?.tax ? true : false}
+                    helperText={errors?.tax?.message}
                     sx={{ flex: 25, margin: ".5rem" }}
                     label="Tax (%)"
                   />
