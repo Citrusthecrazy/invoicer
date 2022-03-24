@@ -1,14 +1,6 @@
-import {
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Typography,
-} from "@mui/material";
-import Select from "../../components/Select";
+import { Autocomplete, IconButton, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import CustomButton from "../../components/CustomButton";
 import Input from "../../components/Input";
@@ -16,6 +8,10 @@ import styles from "./Invoices.module.css";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import easyinvoice, { InvoiceProduct } from "easyinvoice";
 import withAuth from "../../helpers/withAuth";
+import { getCustomerById, getCustomers } from "../../util/DbFunctions";
+import { AuthContext } from "../../contexts/AuthContext";
+import { DocumentData } from "firebase/firestore";
+
 interface Item {
   product: string;
   quantity: string;
@@ -24,9 +20,30 @@ interface Item {
 }
 
 const Invoices = () => {
+  const user = useContext(AuthContext);
   const { control, reset, handleSubmit } = useForm<Item>();
   const [items, setItems] = useState<Array<Item>>([]);
-
+  const [options, setOptions] = useState<Array<any>>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedCustomer, setSelectedCustomer] = useState<DocumentData | null>(
+    options[0]
+  );
+  useEffect(() => {
+    if (!user) return;
+    getCustomers(user).then((customers) => {
+      if (!customers) return;
+      customers.forEach((customer) =>
+        setOptions((options) => [
+          ...options,
+          { label: customer.companyName, id: customer.id },
+        ])
+      );
+    });
+  }, [user]);
+  const handleSetCustomer = async (id: string) => {
+    const customer = await getCustomerById(id);
+    setSelectedCustomer(customer);
+  };
   const onSubmit: SubmitHandler<Item> = (data) => {
     console.log(data);
     setItems((items) => [...items, data]);
@@ -61,11 +78,11 @@ const Invoices = () => {
         country: "Serbia",
       },
       client: {
-        company: "Client Corp",
-        address: "Clientstreet 456",
-        zip: "4567 CD",
-        city: "Clientcity",
-        country: "Clientcountry",
+        company: selectedCustomer?.companyName,
+        address: selectedCustomer?.address,
+        zip: selectedCustomer?.zip,
+        city: selectedCustomer?.city,
+        country: selectedCustomer?.country,
       },
       information: {
         number: "2021.0001",
@@ -87,13 +104,24 @@ const Invoices = () => {
       </Typography>
       <Box className={styles.content}>
         <Paper className={styles.paper} elevation={4}>
-          <FormControl className={styles.formControl}>
-            <InputLabel>Select Recipient</InputLabel>
-            <Select label="Select recipient">
-              <MenuItem>Era</MenuItem>
-              <MenuItem>Pera</MenuItem>
-            </Select>
-          </FormControl>
+          <Autocomplete
+            onChange={(event: any, newValue) => {
+              if (!newValue || !newValue.id) return;
+              handleSetCustomer(newValue.id);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            disablePortal
+            id="customers-combo-box"
+            options={options}
+            sx={{ width: "50%", marginBottom: "1rem" }}
+            onClick={() => console.log("era")}
+            renderInput={(params) => (
+              <Input {...params} label="Select recipient" />
+            )}
+          />
           <Typography variant="h5" gutterBottom fontWeight="medium">
             Items
           </Typography>

@@ -5,6 +5,7 @@ import {
   doc,
   DocumentData,
   DocumentReference,
+  getDoc,
   getDocs,
   query,
   setDoc,
@@ -26,10 +27,24 @@ export const getCustomers = async (
 
   let customers: Array<any> = [];
   querySnapshot.forEach((doc) => {
-    customers = [...customers, doc.data()];
+    const document = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    customers = [...customers, document];
   });
-
   return customers;
+};
+
+export const getCustomerById = async (id: string): Promise<DocumentData> => {
+  const docRef = doc(db, "Customers", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    throw new Error("Customer doesn't exist");
+  }
 };
 
 export const getUserRef = async (

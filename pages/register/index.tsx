@@ -10,6 +10,7 @@ import Input from "../../components/Input";
 import Link from "next/link";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { login, register } from "../../util/AuthFunctions";
+import { useRouter } from "next/router";
 
 interface Register {
   email: string;
@@ -19,11 +20,12 @@ interface Register {
 
 const Register: NextPage = () => {
   const { control, reset, handleSubmit } = useForm<Register>();
-
+  const router = useRouter();
   const onSubmit: SubmitHandler<Register> = async (data) => {
     if (data.password !== data.passwordConfirmation) return;
     await register(data.email, data.password);
     await login(data.email, data.password);
+    router.push("/");
   };
 
   return (
