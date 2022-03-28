@@ -10,6 +10,7 @@ import {
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { User } from "firebase/auth";
@@ -71,3 +72,22 @@ export const addCustomer = async (customer: Customer) => {
 
 export const deleteCustomer = async (customerId: string) =>
   await deleteDoc(doc(db, "Customers", customerId));
+
+export const updateCustomer = async (
+  id: string,
+  companyName: string,
+  address: string,
+  zip: number,
+  city: string,
+  country: string
+) => {
+  const customerRef = doc(db, "Customers", id);
+
+  await updateDoc(customerRef, {
+    companyName: companyName,
+    address: address,
+    zip: zip,
+    city: city,
+    country: country,
+  });
+};
