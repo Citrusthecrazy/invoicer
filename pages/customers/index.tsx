@@ -58,6 +58,7 @@ const Customers = () => {
   };
 
   const handleOpenDialog = () => {
+    reset();
     setDialogOpen(true);
   };
 
@@ -66,12 +67,15 @@ const Customers = () => {
   };
 
   useEffect(() => {
-    if (!user) return;
-    getCustomers(user).then((customers) => {
-      if (!customers) return;
-      setCustomers(customers);
-    });
+    updateCustomers();
   }, [user]);
+
+  const updateCustomers = async () => {
+    if (!user) return;
+    const customers = await getCustomers(user);
+    if (!customers) return;
+    setCustomers(customers);
+  };
 
   return (
     <Box className={styles.container}>
@@ -89,6 +93,7 @@ const Customers = () => {
               zip={customer.zip}
               city={customer.city}
               country={customer.country}
+              updateCustomers={updateCustomers}
             />
           ))}
         </Box>

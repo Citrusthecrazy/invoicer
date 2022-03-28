@@ -11,13 +11,13 @@ import {
   DialogTitle,
   Dialog,
   DialogContent,
-  DialogContentText,
   DialogActions,
   Stack,
 } from "@mui/material";
 import { FaTrash, FaPen } from "react-icons/fa";
 import Input from "../Input";
 import CustomButton from "../CustomButton";
+import { deleteCustomer } from "../../util/DbFunctions";
 
 type Props = {
   id: string;
@@ -26,11 +26,26 @@ type Props = {
   zip: string;
   city: string;
   country: string;
+  updateCustomers: Function;
 };
 
-const index = ({ id, companyName, address, zip, city, country }: Props) => {
+const index = ({
+  id,
+  companyName,
+  address,
+  zip,
+  city,
+  country,
+  updateCustomers,
+}: Props) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const handleDeleteCustomer = async () => {
+    setLoading(true);
+    await deleteCustomer(id);
+    await updateCustomers();
+    setLoading(false);
+  };
   return (
     <Card className={styles.card} elevation={4}>
       <CardContent>
@@ -52,13 +67,19 @@ const index = ({ id, companyName, address, zip, city, country }: Props) => {
       </CardContent>
       <CardActions>
         <Button
+          disabled={loading}
           startIcon={<FaPen />}
           disableRipple
           sx={{ color: "#6b8cff" }}
           onClick={() => setEditDialogOpen(true)}>
           Edit
         </Button>
-        <Button color="error" startIcon={<FaTrash />} disableRipple>
+        <Button
+          disabled={loading}
+          color="error"
+          startIcon={<FaTrash />}
+          disableRipple
+          onClick={handleDeleteCustomer}>
           Delete
         </Button>
       </CardActions>

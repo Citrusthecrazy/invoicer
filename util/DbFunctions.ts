@@ -2,6 +2,7 @@ import { db } from "../lib/firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   DocumentData,
   DocumentReference,
@@ -67,3 +68,6 @@ export const addCustomer = async (customer: Customer) => {
     owner: customer.owner,
   });
 };
+
+export const deleteCustomer = async (customerId: string) =>
+  await deleteDoc(doc(db, "Customers", customerId));
