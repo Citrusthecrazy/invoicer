@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   Stack,
+  Button,
 } from "@mui/material";
+import Input from "../Input";
+import CustomButton from "../CustomButton";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import Input from "../../components/Input";
-import styles from "./Customers.module.css";
-import { Customer } from "../../util/types";
-import { AuthContext } from "../../contexts/AuthContext";
-import { addCustomer, getUserRef } from "../../util/DbFunctions";
-import CustomButton from "../../components/CustomButton";
+import { updateCustomer } from "../../util/DbFunctions";
 
 interface IDialog {
-  id: string;
   companyName: string;
   address: string;
   zip: string;
@@ -25,58 +21,61 @@ interface IDialog {
 }
 
 interface Props {
-  dialogOpen: boolean;
-  setCustomers: Function;
-  setDialogOpen: Function;
+  editDialogOpen: boolean;
+  id: string;
+  companyName: string;
+  address: string;
+  zip: string;
+  city: string;
+  country: string;
+  setEditDialogOpen: Function;
+  updateCustomers: Function;
 }
 
-const UpdateCustomerDialog = ({
-  dialogOpen,
-  setCustomers,
-  setDialogOpen,
+const EditCustomerDialog = ({
+  editDialogOpen,
+  id,
+  companyName,
+  address,
+  zip,
+  city,
+  country,
+  setEditDialogOpen,
+  updateCustomers,
 }: Props) => {
-  const user = useContext(AuthContext);
   const { control, reset, handleSubmit } = useForm<IDialog>();
   const onSubmit: SubmitHandler<IDialog> = async (data) => {
-    if (!user) return;
-    const userRef = await getUserRef(user);
-    if (!userRef || !data.zip) return;
-    const customer: Customer = {
-      id: data.id,
-      companyName: data.companyName,
-      address: data.address,
-      city: data.city,
-      country: data.country,
-      zip: Number(data.zip),
-      owner: userRef,
-    };
-    await addCustomer(customer);
-    setCustomers((customers: Array<Customer>) => [...customers, customer]);
-    setDialogOpen(false);
+    await updateCustomer(
+      id,
+      data.companyName,
+      data.address,
+      Number(data.zip),
+      data.city,
+      data.country
+    ).catch((e) => console.log(e.message));
+    setEditDialogOpen(false);
+    await updateCustomers();
   };
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
   return (
-    <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-      <DialogTitle>New Customer</DialogTitle>
+    <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
+      <DialogTitle>Edit {companyName}</DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
-          <Stack direction="row" spacing={2} className={styles.stack}>
+          <Stack direction="row" spacing={2} sx={{ marginY: "1rem" }}>
             <Controller
               name="companyName"
               control={control}
-              defaultValue=""
+              defaultValue={companyName}
               rules={{ required: true }}
               render={({ field }) => (
                 <Input
                   {...field}
                   autoFocus
-                  id="name"
+                  fullWidth
+                  id="companyName"
                   label="Company name"
                   type="text"
-                  fullWidth
                   variant="outlined"
                 />
               )}
@@ -84,33 +83,39 @@ const UpdateCustomerDialog = ({
             <Controller
               name="address"
               control={control}
-              defaultValue=""
+              defaultValue={address}
               rules={{ required: true }}
               render={({ field }) => (
                 <Input
                   {...field}
+                  fullWidth
                   id="address"
                   label="Address"
                   type="text"
-                  fullWidth
                   variant="outlined"
                 />
               )}
             />
           </Stack>
-          <Stack direction="row" spacing={2} className={styles.stack}>
+          <Stack direction="row" spacing={2} sx={{ marginBottom: "1rem" }}>
             <Controller
               name="zip"
               control={control}
-              defaultValue=""
-              rules={{ required: true }}
+              defaultValue={zip}
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[1-9]\d*(\d+)?$/i,
+                  message: "Please enter a number",
+                },
+              }}
               render={({ field }) => (
                 <Input
                   {...field}
-                  id="zip"
-                  label="Zip code"
-                  type="text"
                   fullWidth
+                  id="zip"
+                  label="Zip"
+                  type="text"
                   variant="outlined"
                 />
               )}
@@ -118,15 +123,15 @@ const UpdateCustomerDialog = ({
             <Controller
               name="city"
               control={control}
-              defaultValue=""
+              defaultValue={city}
               rules={{ required: true }}
               render={({ field }) => (
                 <Input
                   {...field}
+                  fullWidth
                   id="city"
                   label="City"
                   type="text"
-                  fullWidth
                   variant="outlined"
                 />
               )}
@@ -135,35 +140,31 @@ const UpdateCustomerDialog = ({
           <Controller
             name="country"
             control={control}
-            defaultValue=""
+            defaultValue={country}
             rules={{ required: true }}
             render={({ field }) => (
               <Input
                 {...field}
+                fullWidth
                 id="country"
                 label="Country"
                 type="text"
-                fullWidth
                 variant="outlined"
               />
             )}
           />
+          <DialogActions>
+            <Button color="error" onClick={() => setEditDialogOpen(false)}>
+              Cancel
+            </Button>
+            <CustomButton type="submit" variant="contained">
+              Update
+            </CustomButton>
+          </DialogActions>
         </DialogContent>
-        <DialogActions>
-          <Button
-            color="error"
-            variant="text"
-            disableRipple
-            onClick={handleCloseDialog}>
-            Cancel
-          </Button>
-          <CustomButton type="submit" variant="contained">
-            Save
-          </CustomButton>
-        </DialogActions>
       </form>
     </Dialog>
   );
 };
 
-export default UpdateCustomerDialog;
+export default EditCustomerDialog;

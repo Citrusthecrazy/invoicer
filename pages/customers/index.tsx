@@ -7,7 +7,7 @@ import withAuth from "../../helpers/withAuth";
 import { getCustomers } from "../../util/DbFunctions";
 import { AuthContext } from "../../contexts/AuthContext";
 import { DocumentData } from "firebase/firestore";
-import UpdateCustomerDialog from "./UpdateCustomerDialog";
+import NewCustomerDialog from "./NewCustomerDialog";
 
 const Customers = () => {
   const user = useContext(AuthContext);
@@ -56,7 +56,7 @@ const Customers = () => {
           </Fab>
         </Tooltip>
       </Box>
-      <UpdateCustomerDialog
+      <NewCustomerDialog
         dialogOpen={dialogOpen}
         setCustomers={setCustomers}
         setDialogOpen={setDialogOpen}
